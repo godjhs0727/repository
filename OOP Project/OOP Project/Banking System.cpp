@@ -79,6 +79,20 @@ int main()
 		{
 		case Make:
 			MakeAccount();
+			break;
+		case Deposit:
+			DepositMoney();
+			break;
+		case Withdraw:
+			WithdrawMoney();
+			break;
+		case Show:
+			ShowAllAccInfo();
+			break;
+		case Exit:
+			return 0;
+		default:
+			cout << "Illegal Selection" << endl;
 		}
 	}
 
@@ -109,4 +123,64 @@ void MakeAccount()
 	strcpy(accArr[accNum].cusNAME, name);
 	accNum++; //은행 통산정보에 들어가는것
 
+}
+
+void DepositMoney()
+{
+	int money;
+	int id;
+	cout << "입금" << endl;
+	cout << "계좌ID:" ; cin >> id;
+	cout << "입금액:"; cin >> money;
+
+	for (int i = 0; i < accNum; i++)
+	{
+		if (accArr[i].accID == id)
+		{
+			accArr[i].balance += money;
+			cout << "입금완료" << endl << endl;
+			return;
+		}
+	}
+	cout << "유효하지 않은 ID 입니다." << endl << endl;
+
+}
+
+void WithdrawMoney()
+{
+	int money;
+	int id;
+
+	cout << "출금" << endl;
+	cout << "계좌ID:"; cin >> id;
+	cout << "출금액:"; cin >> money;
+
+	for (int i = 0; i < accNum; i++)
+	{
+		if (accArr[i].accID == id)
+		{
+			if (accArr[i].balance < money)
+			{
+				cout << "잔액부족" << endl;
+				return;
+			}
+			accArr[i].balance -= money;
+			cout << "출금완료" << endl << endl;
+			return;
+		}
+
+	}
+	cout << "유효하지 않은 ID 입니다." << endl << endl;
+	
+}
+
+void ShowAllAccInfo()
+{
+	for (int i = 0; i < accNum; i++)
+	{
+		cout << "계좌 ID: " << accArr[i].accID << endl;
+		cout << "이   름: " << accArr[i].cusNAME << endl;
+		cout << "잔   액: " << accArr[i].balance << endl;
+	}
+	cout << endl;
 }
