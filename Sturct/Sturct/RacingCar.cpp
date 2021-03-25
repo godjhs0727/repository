@@ -12,15 +12,15 @@ struct Car
 	char gamerID[ID_LEN];	//소유자 ID, ID_LEN은 20이다
 	int fuelGauge;			//연료량
 	int curSpd;				//현재속도
+
+
+	void ShowCarState() // 구조체 안에 전부 넣으면 끌어올 필요가 없다.
+	{
+		cout << "소유자 ID: " << gamerID << endl;
+		cout << "연료량: " << fuelGauge << "%" << endl;
+		cout << "현재속도: " << curSpd << "km/s" << endl;
+	}
 };
-
-void ShowCarState(const Car &car) //정보만 주고 수정 안하니 상수화해서 const화 시킨다.
-{
-	cout << "소유자 ID: " << car.gamerID << endl;
-	cout << "연료량: " << car.fuelGauge << "%" << endl;
-	cout << "현재속도: " << car.curSpd << "km/s" << endl;
-}
-
 void Accel(Car &car)
 {
 	if (car.fuelGauge <= 0) //연료가 0이나 그 보다 작으면 return
@@ -53,18 +53,18 @@ int main()
 	Car run99 = { "run99",100,0 }; //ID, 연료량, 현재속도
 	Accel(run99); //연료 2 감소, 속도 10 증가
 	Accel(run99); // 위와 동
-	ShowCarState(run99);
+	run99.ShowCarState();
 	Break(run99); //속도 10 감소
-	ShowCarState(run99);
+	run99.ShowCarState();
 	cout << endl;
 
 	Car run0 = { "run0",100,0 };
 	Accel(run0); //연료 2 감소, 속도 10 증가
-	ShowCarState(run0);
+	run0.ShowCarState();
 	Break(run0); //속도 10 감소
 	Break(run0); 
 	Break(run0); //계속 감소하지만 0 밑으로는 안내려간다.
-	ShowCarState(run0);
+	run0.ShowCarState();
 
 	return 0;
 }
