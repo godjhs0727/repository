@@ -13,11 +13,11 @@ namespace CAR_CONST
 
 class Car //class는 기본적으로 private이라 다른곳에서 불러올수 없다 호출하려면 상속자의 protected, 또는 public
 {
-private:
+private: //class내에서만 접근 가능
 	char gamerID[CAR_CONST::ID_LEN];
 	int fuelGauge;
 	int curSpeed;
-public:
+public: //어디서든 접근이 가능
 	void InitMember(const char*ID, int fuel);
 	void ShowCarState();
 	void Accel();
