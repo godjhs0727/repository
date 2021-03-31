@@ -21,12 +21,11 @@ public:
 		age = 0;
 		cout << "called Person()" << endl;
 	}
-	void SetPersonInfo(const char* myname, int myage) //원하는 데이터로의 초기화를 목적으로 정의된 함수이다. 생략해도 무방
-	{
-		name = new char[strlen(myname) + 1];
-		strcpy(name, myname);
-		age = myage;
-	}
+	//void SetPersonInfo(const char* myname, int myage) //원하는 데이터로의 초기화를 목적으로 정의된 함수이다. 생략해도 무방
+	//{
+	//	name = myname;
+	//	age = myage;
+	//}
 	void ShowPersonInfo() const
 	{
 		cout << "이름: " << name << ", ";
@@ -41,7 +40,7 @@ public:
 
 int main()
 {
-	Person *parr[3];
+	Person* parr[3];
 	char namestr[100];
 	char* strptr;
 	int age;
@@ -52,11 +51,18 @@ int main()
 		cin >> namestr;
 		cout << "나이: ";
 		cin >> age;
+		/*strptr = new char[strlen(namestr) + 1];
+		strcpy(strptr, namestr);
+		parr[i].SetPersonInfo(strptr, age);*/
 		parr[i] = new Person(namestr, age);
+
 	}
 	parr[0]->ShowPersonInfo();
 	parr[1]->ShowPersonInfo();
 	parr[2]->ShowPersonInfo();
+	delete parr[0];
+	delete parr[1];
+	delete parr[2];
 
 	return 0;
 }
