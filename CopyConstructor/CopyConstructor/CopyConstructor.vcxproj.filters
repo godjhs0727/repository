@@ -30,5 +30,11 @@
     <ClCompile Include="ReturnObjCopycon.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="TempObj.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="ReturnObjDeadTime.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

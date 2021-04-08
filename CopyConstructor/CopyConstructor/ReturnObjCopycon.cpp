@@ -14,7 +14,7 @@ public:
 	SoSimple& AddNum(int n)
 	{
 		num += n;
-		return *this;
+		return *this; //객체 자신을 반환
 	}
 	void ShowData()
 	{
