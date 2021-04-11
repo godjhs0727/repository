@@ -38,13 +38,17 @@ public:
 		Calculate();
 		UseBattery();
 	}
+	void HowLongBattery()
+	{
+		cout << "Battery: " << Battery << "%" << endl;
+	}
 };
-class TableNotebook : public NotebookComp
+class TabletNotebook : public NotebookComp
 {
 private:
 	char regstPenModel[50];
 public:
-	TableNotebook(const char*name, int initChag, const char* pen)
+	TabletNotebook(const char*name, int initChag, const char* pen)
 		:NotebookComp(name, initChag)
 	{
 		strcpy(regstPenModel, pen);
@@ -64,13 +68,18 @@ public:
 		cout << "필기 내용을 처리합니다." << endl;
 		UseBattery();
 	}
+	void HowLongBattery()
+	{
+		NotebookComp::HowLongBattery();
+	}
 };
 int main()
 {
 	NotebookComp nc("Lee", 10); //컴퓨터 이름, 충전 잔량
-	TableNotebook tn("Kim", 10, "PenName");
+	TabletNotebook tn("Kim", 10, "PenName"); //위와 동, 펜 종류
 	nc.MovingCal();
 	tn.Write("PenName");
-
+	nc.HowLongBattery();
+	tn.HowLongBattery();
 	return 0;
 }
