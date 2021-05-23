@@ -5,12 +5,22 @@ using UnityEngine;
 public class PlayerMove : MonoBehaviour
 {
     public GameManager gameManager;
+
+    public AudioClip audioJump;
+    public AudioClip audioAttack;
+    public AudioClip audioDamaged;
+    public AudioClip audioItem;
+    public AudioClip audioDie;
+    public AudioClip audioFinish;
+
     public float maxSpeed; //public으로 주면 unity에 inspector 창에 나옴
     public float jump;
     Rigidbody2D rigid;
     SpriteRenderer spriteRenderer;
     Animator anim;
     CapsuleCollider2D capCollider;
+    AudioSource audioSource;
+
     void Awake()
     {
         rigid = GetComponent<Rigidbody2D>(); //rigid물리력
@@ -18,6 +28,38 @@ public class PlayerMove : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>(); //초기화
         capCollider = GetComponent<CapsuleCollider2D>();
         anim = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
+    }
+
+    public void PlaySound(string action)
+    {
+        switch(action)
+        {
+            case "JUMP":
+                audioSource.clip = audioJump;
+                audioSource.Play();
+                break;
+            case "ATTACK":
+                audioSource.clip = audioAttack;
+                audioSource.Play();
+                break;
+            case "DAMAGED":
+                audioSource.clip = audioDamaged;
+                audioSource.Play();
+                break;
+            case "ITEM":
+                audioSource.clip = audioItem;
+                audioSource.Play();
+                break;
+            case "DIE":
+                audioSource.clip = audioDie;
+                audioSource.Play();
+                break;
+            case "FINISH":
+                audioSource.clip = audioFinish;
+                audioSource.Play();
+                break;
+        }
     }
 
     void Update()
@@ -28,6 +70,7 @@ public class PlayerMove : MonoBehaviour
             rigid.AddForce(Vector2.up * jump, ForceMode2D.Impulse);
             //animation 입히기
             anim.SetBool("isJumping", true);
+            PlaySound("JUMP");
         }
         //Linear Drag의 공기저항이 2라서 떼는 순간 속도를 안정감 있게 멈추게 한다.
         //멈출때 속도
@@ -77,7 +120,7 @@ public class PlayerMove : MonoBehaviour
                                                                                                                      //히트는 오로지 layermask에 해당하는 것들만 스캔한다.
             if (rayHit.collider != null) // 빔을 쏴서 맞았다면
             {
-                if (rayHit.distance < 0.5f) //플레이어의 절반 만큼 내려와서 바닥에 닿았을 경우
+                if (rayHit.distance < 0.5) //플레이어의 절반 만큼 내려와서 바닥에 닿았을 경우
                 {
                     anim.SetBool("isJumping", false);
                 }
@@ -87,21 +130,25 @@ public class PlayerMove : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.tag == "Enemy")
+        if (collision.gameObject.tag == "Enemy")
         {
             //Attack
             if (rigid.velocity.y < 0 && transform.position.y > collision.transform.position.y)
             {
                 OnAttack(collision.transform);
+                PlaySound("ATTACK");
             }
             else
+            {
                 OnDamaged(collision.transform.position);
+            }
         }
     }
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.tag == "Item")
+        capCollider.isTrigger = true;
+        if (collision.gameObject.tag == "Item")
         {
             bool isBronze = collision.gameObject.name.Contains("Bronze");
             bool isSilver = collision.gameObject.name.Contains("Silver");
@@ -117,12 +164,18 @@ public class PlayerMove : MonoBehaviour
             gameManager.stagePoint += 100;
             //Deactive Item
             collision.gameObject.SetActive(false);
+            PlaySound("ITEM");
         }
         else if(collision.gameObject.tag == "Finish")
         {
             //Next Stage
             gameManager.NextStage();
+            PlaySound("FINISH");
         }
+    }
+    void OnTriggerExit2D(Collider2D collision)
+    {
+        capCollider.isTrigger = false;
     }
     void OnAttack(Transform enemy)
     {
@@ -139,6 +192,7 @@ public class PlayerMove : MonoBehaviour
     {
         //Health Down
         gameManager.HealthDown();
+
         //layer 변경 번호
         gameObject.layer = 11;
         //스프라이트 색 RGB 다음 4번째 투명도
@@ -171,6 +225,7 @@ public class PlayerMove : MonoBehaviour
         capCollider.enabled = false;
         //Die Effect Jump
         rigid.AddForce(Vector2.up * 5, ForceMode2D.Impulse);
+        PlaySound("DIE");
     }
     public void VelocityZero()
     {

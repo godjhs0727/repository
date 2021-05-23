@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -10,6 +12,16 @@ public class GameManager : MonoBehaviour
     public int health;
     public PlayerMove player;
     public GameObject[] Stages;
+
+    public Image[] UIhealth;
+    public Text Point;
+    public Text Stage;
+    public GameObject RestartBtn;
+
+    void Update()
+    {
+        Point.text = (totalPoint + stagePoint).ToString();
+    }
 
     public void NextStage()
     {
@@ -26,21 +38,32 @@ public class GameManager : MonoBehaviour
             //Game Clear
             //Player Control Lock
             Time.timeScale = 0; //øœ¡÷«œ∏È Ω√∞£¿Ã ∏ÿ√„
+            Text btnText = RestartBtn.GetComponentInChildren<Text>();
+            btnText.text = "Game Clear!";
+            RestartBtn.SetActive(true);
         }
         //Calculate Point
         totalPoint += stagePoint;
         stagePoint = 0;
+
+        Stage.text = "STAGE " + (stageIndex + 1);
     }
     public void HealthDown()
     {
         if (health > 1)
+        {
             health--;
+            UIhealth[health].color = new Color(1, 0, 0, 0.4f);
+            player.PlaySound("DAMAGED");
+        }
         else
         {
-            player.OnDie();
+            UIhealth[0].color = new Color(1, 0, 0, 0.4f);
             //Player Die Effect
+            player.OnDie();
             //Result UI
             //Retry Button UI
+            RestartBtn.SetActive(true);
         }
     }
 
@@ -63,5 +86,11 @@ public class GameManager : MonoBehaviour
     {
         player.transform.position = new Vector3(-9, 1, 0);
         player.VelocityZero();
+    }
+
+    public void Restart()
+    {
+        Time.timeScale = 1;
+        SceneManager.LoadScene(0);
     }
 }
