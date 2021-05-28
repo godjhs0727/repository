@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
+    public GameObject bulletObj;
     public GameManager gameManager;
     Rigidbody2D rigid; //rigid 플레이어
     SpriteRenderer spriteRenderer; //방향 전환하기 위한 spriterenderer flip
@@ -37,7 +38,27 @@ public class PlayerMove : MonoBehaviour
         if(Input.GetButton("Horizontal")) //화살표 좌우를 누른다, 버튼을 누를때 뗄때 관계없이
         {
             spriteRenderer.flipX = Input.GetAxisRaw("Horizontal") == -1; //방향 전환할때 스프라이트 그림이 좌우 X축 기준으로 바뀐다.
-        }        
+        }   
+        if(Input.GetButtonUp("Fire1"))
+        {
+            if (spriteRenderer.flipX)
+            {
+                Fire();
+            }
+            else
+            {
+                GameObject bullet = Instantiate(bulletObj, transform.position, transform.rotation);
+                Rigidbody2D rigid = bullet.GetComponent<Rigidbody2D>();
+                rigid.AddForce(Vector2.right * 5, ForceMode2D.Impulse);
+
+            }
+        }
+    }
+    void Fire()
+    {
+        GameObject bullet = Instantiate(bulletObj, transform.position, transform.rotation);
+        Rigidbody2D rigid = bullet.GetComponent<Rigidbody2D>();
+        rigid.AddForce(Vector2.right * (-5), ForceMode2D.Impulse);
     }
     void FixedUpdate()
     {
@@ -79,11 +100,24 @@ public class PlayerMove : MonoBehaviour
                 OnAttack(collision.transform);
             }
             else
-                OnDamaged(collision.transform.position); //데미지 함수 호출(플레이어가 맞은 collider)
+            {
+                if (gameManager.health < 2)
+                    OnDie();
+                else
+                    OnDamaged(collision.transform.position); //데미지 함수 호출(플레이어가 맞은 collider)
+            }
+        }
+        else if(collision.gameObject.tag == "SpikeEnemy")
+        {
+            if (gameManager.health < 2)
+                OnDie();
+            else
+                OnDamaged(collision.transform.position);
         }
     }
     void OnTriggerEnter2D(Collider2D collision)
     {
+        capCollider.isTrigger = true;
         if (collision.tag == "Ring")
         {
             gameManager.stagePoint += 100;
@@ -95,6 +129,10 @@ public class PlayerMove : MonoBehaviour
             gameManager.NextStage();
         }
 
+    }
+    void OnTriggerExit2D(Collider2D collision)
+    {
+        capCollider.isTrigger = false;   
     }
     void OnAttack(Transform enemy)
     {
@@ -117,7 +155,7 @@ public class PlayerMove : MonoBehaviour
         rigid.AddForce(new Vector2(dirc, 1) * 7, ForceMode2D.Impulse); //물체가 힘을 받는다
 
         anim.SetTrigger("Damage"); //트리거 파라미터로 놓았다. 맞으면 발동하는 anystate 애니메이션, anystate는 어떤 애니메이션이 작동하던간에 당장 실행 시킬수 있음
-        Invoke("OffDamaged", 3); //3초뒤에 함수를 불러서 데미지상태는 3초간만 유지 이후에 원래대로
+        Invoke("OffDamaged", 5); //3초뒤에 함수를 불러서 데미지상태는 3초간만 유지 이후에 원래대로
     }
     void OffDamaged()
     {
@@ -127,8 +165,10 @@ public class PlayerMove : MonoBehaviour
         
     public void OnDie()
     {
-        spriteRenderer.color = new Color(1, 1, 1, 0.4f); 
-        spriteRenderer.flipY = true; //거꾸로 뒤집기
+        anim.SetTrigger("Fall");
+        Time.timeScale = 0;
+        //spriteRenderer.color = new Color(1, 1, 1, 0.4f); 
+        //spriteRenderer.flipY = true; //거꾸로 뒤집기
         capCollider.enabled = false; //고체화 해제하여 중력은 그대로 아래로 떨어짐
         rigid.AddForce(Vector2.up * 5, ForceMode2D.Impulse); //살짝 뜸
     }

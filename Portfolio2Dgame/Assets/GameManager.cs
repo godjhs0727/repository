@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -10,6 +12,19 @@ public class GameManager : MonoBehaviour
     public int health;
     public PlayerMove player;
     public GameObject[] Stages;
+
+    public Image[] UIhealth;
+    public Text UIPoint;
+    public Text UIStage;
+    public GameObject RestartBtn;
+
+    public object ScenManager { get; private set; }
+
+    void Update()
+    {
+        UIPoint.text = (totalPoint + stagePoint).ToString();
+        UIStage.text = UIStage.text = "STAGE " + (stageIndex + 1);
+    }
     public void NextStage()
     {
         if (stageIndex < Stages.Length - 1)
@@ -18,10 +33,14 @@ public class GameManager : MonoBehaviour
             stageIndex++;
             Stages[stageIndex].SetActive(true);
             PlayerReposition();
+            
         }
         else
         {
             Time.timeScale = 0;
+            Text btnText = RestartBtn.GetComponentInChildren<Text>();
+            btnText.text = "Game Clear!";
+            RestartBtn.SetActive(true);
         }
 
 
@@ -30,13 +49,16 @@ public class GameManager : MonoBehaviour
     }
     public void HealthDown()
     {
-        if(health > 0)
+        if (health > 1)
         {
             health--;
+            UIhealth[health].color = new Color(1, 0, 0, 0.2f);
         }
         else
         {
+            UIhealth[0].color = new Color(1, 0, 0, 0.2f);
             player.OnDie();
+            RestartBtn.SetActive(true);
         }
     }
 
@@ -45,7 +67,12 @@ public class GameManager : MonoBehaviour
         if (collision.gameObject.tag == "Player")
         {
             if (health > 1)
-                PlayerReposition();
+            {
+                Animator anim = player.GetComponent<Animator>();
+                anim.SetTrigger("Fall");
+                    
+                Invoke("PlayerReposition", 1);
+            }
 
             HealthDown();
         }
@@ -55,5 +82,9 @@ public class GameManager : MonoBehaviour
         player.transform.position = new Vector3(0, 0, 0);
         player.VelocityZero();
     }
-
+    public void Restart()
+    {
+        Time.timeScale = 1;
+        SceneManager.LoadScene(0);
+    }
 }
