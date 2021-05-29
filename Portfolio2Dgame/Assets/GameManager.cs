@@ -17,8 +17,7 @@ public class GameManager : MonoBehaviour
     public Text UIPoint;
     public Text UIStage;
     public GameObject RestartBtn;
-
-    public object ScenManager { get; private set; }
+    public GameObject[] Background;
 
     void Update()
     {
@@ -30,8 +29,10 @@ public class GameManager : MonoBehaviour
         if (stageIndex < Stages.Length - 1)
         {
             Stages[stageIndex].SetActive(false);
+            Background[stageIndex].SetActive(false);
             stageIndex++;
             Stages[stageIndex].SetActive(true);
+            Background[stageIndex].SetActive(true);
             PlayerReposition();
             
         }
@@ -70,8 +71,8 @@ public class GameManager : MonoBehaviour
             {
                 Animator anim = player.GetComponent<Animator>();
                 anim.SetTrigger("Fall");
-                    
-                Invoke("PlayerReposition", 1);
+
+                PlayerReposition();
             }
 
             HealthDown();

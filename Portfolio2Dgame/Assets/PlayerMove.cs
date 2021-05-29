@@ -6,10 +6,18 @@ public class PlayerMove : MonoBehaviour
 {
     public GameObject bulletObj;
     public GameManager gameManager;
+    public AudioClip audioJump;
+    public AudioClip audioAttack;
+    public AudioClip audioDamaged;
+    public AudioClip audioItem;
+    public AudioClip audioDie;
+    public AudioClip audioFinish;
+    public AudioClip audioBullet;
     Rigidbody2D rigid; //rigid 플레이어
     SpriteRenderer spriteRenderer; //방향 전환하기 위한 spriterenderer flip
     Animator anim; //애니메이션 효과
     CapsuleCollider2D capCollider;
+    AudioSource audioSource;
     float maxSpeed = 3; //스피드를 기본 3으로 설정 변경을 원하면 변수 선언만 해놓고 유니티 안에서 변경가능
     public float JumpPower; //유니티에서 변경 처음 default 0
     void Awake() //초기화 하기 위한 Awake
@@ -18,6 +26,41 @@ public class PlayerMove : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>(); //초기화
         anim = GetComponent<Animator>(); //초기화
         capCollider = GetComponent<CapsuleCollider2D>();
+        audioSource = GetComponent<AudioSource>();
+    }
+    void PlaySound(string action)
+    {
+        switch (action)
+        {
+            case "JUMP":
+                audioSource.clip = audioJump;
+                audioSource.Play();
+                break;
+            case "ATTACK":
+                audioSource.clip = audioAttack;
+                audioSource.Play();
+                break;
+            case "DAMAGED":
+                audioSource.clip = audioDamaged;
+                audioSource.Play();
+                break;
+            case "ITEM":
+                audioSource.clip = audioItem;
+                audioSource.Play();
+                break;
+            case "DIE":
+                audioSource.clip = audioDie;
+                audioSource.Play();
+                break;
+            case "FINISH":
+                audioSource.clip = audioFinish;
+                audioSource.Play();
+                break;
+            case "FIRE":
+                audioSource.clip = audioBullet;
+                audioSource.Play();
+                break;
+        }
     }
     void Update()
     {
@@ -26,6 +69,7 @@ public class PlayerMove : MonoBehaviour
         {
             rigid.AddForce(Vector2.up * JumpPower, ForceMode2D.Impulse); //AddForce로 힘을 가한다 Vector2가 위로 JumpPower만큼 올리고 ForceMode2D.Impulse
             anim.SetBool("isJumping", true); //애니메이션 isJumping 이 true
+            PlaySound("JUMP");
         }
 
         //멈출때의 공기저항 바닥을 마찰력 0으로 설정되어있기에 멈출때 많이 미끄러져서 덜 미끄러지게 저항 설정
@@ -39,18 +83,20 @@ public class PlayerMove : MonoBehaviour
         {
             spriteRenderer.flipX = Input.GetAxisRaw("Horizontal") == -1; //방향 전환할때 스프라이트 그림이 좌우 X축 기준으로 바뀐다.
         }   
+        //총알
         if(Input.GetButtonUp("Fire1"))
         {
             if (spriteRenderer.flipX)
             {
                 Fire();
+                PlaySound("FIRE");
             }
             else
             {
                 GameObject bullet = Instantiate(bulletObj, transform.position, transform.rotation);
                 Rigidbody2D rigid = bullet.GetComponent<Rigidbody2D>();
                 rigid.AddForce(Vector2.right * 5, ForceMode2D.Impulse);
-
+                PlaySound("FIRE");
             }
         }
     }
@@ -122,11 +168,12 @@ public class PlayerMove : MonoBehaviour
         {
             gameManager.stagePoint += 100;
             collision.gameObject.SetActive(false);
-            
+            PlaySound("ITEM");
         }
         else if (collision.tag == "Finish")
         {
             gameManager.NextStage();
+            PlaySound("FINISH");
         }
 
     }
@@ -140,6 +187,7 @@ public class PlayerMove : MonoBehaviour
         rigid.AddForce(Vector2.up * 5, ForceMode2D.Impulse); //피격 성공시 플레이어가 살짝 뜬다.
         EnemyMove enemyMove = enemy.GetComponent<EnemyMove>(); //EnemyMove스크립트를 사용하기 위해 초기화
         enemyMove.OnDamaged(); //EnemyMove 스크립트의 public화 된 함수를 가져옴
+        PlaySound("ATTACK");
     }
     void OnDamaged(Vector2 targetPos) //(Enter2D이기 때문에 Vector2), 무적 상태
     {
@@ -156,6 +204,7 @@ public class PlayerMove : MonoBehaviour
 
         anim.SetTrigger("Damage"); //트리거 파라미터로 놓았다. 맞으면 발동하는 anystate 애니메이션, anystate는 어떤 애니메이션이 작동하던간에 당장 실행 시킬수 있음
         Invoke("OffDamaged", 5); //3초뒤에 함수를 불러서 데미지상태는 3초간만 유지 이후에 원래대로
+        PlaySound("DAMAGED");
     }
     void OffDamaged()
     {
@@ -171,6 +220,7 @@ public class PlayerMove : MonoBehaviour
         //spriteRenderer.flipY = true; //거꾸로 뒤집기
         capCollider.enabled = false; //고체화 해제하여 중력은 그대로 아래로 떨어짐
         rigid.AddForce(Vector2.up * 5, ForceMode2D.Impulse); //살짝 뜸
+        PlaySound("DIE");
     }
     public void VelocityZero()
     {

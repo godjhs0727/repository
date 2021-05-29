@@ -5,11 +5,10 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     Rigidbody2D rigid;
-    BoxCollider2D box;
+    public AudioClip audioBullet;
     void Awake()
     {
         rigid = GetComponent<Rigidbody2D>();
-        box = GetComponent<BoxCollider2D>();
     }
     void OnTriggerEnter2D(Collider2D collision)
     {
@@ -19,7 +18,7 @@ public class Bullet : MonoBehaviour
         }
         else if (collision.gameObject.tag == "SpikeEnemy")
         {
-            OnAttack(collision.transform);
+            OnAttack(collision.transform);            
             Destroy(gameObject);
         }
     }
