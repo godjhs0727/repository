@@ -50,7 +50,7 @@ public class GameManager : MonoBehaviour
     }
     public void HealthDown()
     {
-        if (health > 1)
+        if (health > 0)
         {
             health--;
             UIhealth[health].color = new Color(1, 0, 0, 0.2f);
