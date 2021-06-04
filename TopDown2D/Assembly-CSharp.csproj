@@ -69,6 +69,7 @@
     <Compile Include="Assets\Tilemap\Tiles\Animated Tile\Scripts\AnimatedTile.cs" />
     <Compile Include="Assets\Tilemap\Tiles\Weighted Random Tile\WeightedRandomTile.cs" />
     <Compile Include="Assets\Script\PlayerAction.cs" />
+    <Compile Include="Assets\Script\GameManager.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\Tilemap\Tiles\Rule Tile\ScriptTemplates\NewCustomRuleTile.cs.txt" />

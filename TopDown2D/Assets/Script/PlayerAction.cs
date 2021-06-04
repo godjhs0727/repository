@@ -5,6 +5,8 @@ using UnityEngine;
 public class PlayerAction : MonoBehaviour
 {
     public float Speed; //움직임을 위한
+    public GameManager manager;
+
     Rigidbody2D rigid; //물리력 초기화
     float h; //수평
     float v; //수직
@@ -20,13 +22,13 @@ public class PlayerAction : MonoBehaviour
     }
     void Update()
     {
-        h = Input.GetAxisRaw("Horizontal"); //수평 초기화 방향키 이동
-        v = Input.GetAxisRaw("Vertical"); //수직 초기화
+        h = manager.isAction ? 0 : Input.GetAxisRaw("Horizontal"); //수평 초기화 방향키 이동
+        v = manager.isAction ? 0 : Input.GetAxisRaw("Vertical"); //수직 초기화
 
-        bool hDown = Input.GetButtonDown("Horizontal"); //수평 누르는 순간
-        bool vDown = Input.GetButtonDown("Vertical"); //수직
-        bool hUp = Input.GetButtonUp("Horizontal"); //수평 뗄 때
-        bool vUp = Input.GetButtonUp("Vertical"); //수직
+        bool hDown = manager.isAction ? false : Input.GetButtonDown("Horizontal"); //수평 누르는 순간
+        bool vDown = manager.isAction ? false : Input.GetButtonDown("Vertical"); //수직
+        bool hUp = manager.isAction ? false : Input.GetButtonUp("Horizontal"); //수평 뗄 때
+        bool vUp = manager.isAction ? false : Input.GetButtonUp("Vertical"); //수직
 
         if (hDown)
             isHorizonMove = true;
@@ -62,7 +64,7 @@ public class PlayerAction : MonoBehaviour
         //Scan Object
         if(Input.GetButtonDown("Jump") && scanObject != null)
         {
-            Debug.Log("this is : " + scanObject.name);
+            manager.Action(scanObject);
         }
     }
 
