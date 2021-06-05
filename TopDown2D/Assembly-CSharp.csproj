@@ -67,11 +67,13 @@
     <Compile Include="Assets\Tilemap\Tiles\Isometric Rule Tile\IsometricRuleTile.cs" />
     <Compile Include="Assets\Tilemap\Tiles\Hexagonal Rule Tile\HexagonalRuleTile.cs" />
     <Compile Include="Assets\Tilemap\Tiles\Rule Tile\Scripts\RuleTile.cs" />
+    <Compile Include="Assets\Script\TalkManager.cs" />
     <Compile Include="Assets\Tilemap\Tiles\Animated Tile\Scripts\AnimatedTile.cs" />
     <Compile Include="Assets\Tilemap\Tiles\Weighted Random Tile\WeightedRandomTile.cs" />
-    <Compile Include="Assets\Script\PlayerAction.cs" />
     <Compile Include="Assets\Script\ObjectData.cs" />
-    <Compile Include="Assets\Script\TalkManager.cs" />
+    <Compile Include="Assets\Script\PlayerAction.cs" />
+    <Compile Include="Assets\Script\QuestManager.cs" />
+    <Compile Include="Assets\Script\QuestData.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\Tilemap\Tiles\Rule Tile\ScriptTemplates\NewCustomRuleTile.cs.txt" />
