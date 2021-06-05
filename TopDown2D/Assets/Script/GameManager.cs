@@ -7,12 +7,14 @@ public class GameManager : MonoBehaviour
 {
     public TalkManager talkManager;
     public QuestManager questManager;
-    public GameObject talkPanel;
+    public Animator talkPanel;
     public Image portraitImg;
-    public Text talkText;
+    public Animator portraitAnim;
+    public TypeEffect talk;
     public GameObject scanObject;
     public bool isAction;
     public int talkIndex;
+    public Sprite prevPortrait;
 
     void Start()
     {
@@ -24,14 +26,23 @@ public class GameManager : MonoBehaviour
         ObjectData objData = scanObject.GetComponent<ObjectData>();
         Talk(objData.id, objData.isNpc);
 
-        talkPanel.SetActive(isAction);
+        talkPanel.SetBool("isShow", isAction);
     }
     void Talk(int id, bool isNpc)
     {
+        int questTalkIndex = 0;
+        string talkData = "";
         //Set Talk Data
-        int questTalkIndex = questManager.GetQuestTalkIndex(id); //10
-        string talkData = talkManager.GetTalk(id + questTalkIndex, talkIndex); //1000 + 10, 0
-
+        if (talk.isAnim)
+        {
+            talk.SetMsg("");
+            return;
+        }
+        else
+        {
+            questTalkIndex = questManager.GetQuestTalkIndex(id); //10
+            talkData = talkManager.GetTalk(id + questTalkIndex, talkIndex); //1000 + 10, 0
+        }
         //End Talk
         if (talkData == null)
         {
@@ -44,15 +55,20 @@ public class GameManager : MonoBehaviour
         //Continue Talk
         if(isNpc)
         {
-            talkText.text = talkData.Split(':')[0];
+            talk.SetMsg(talkData.Split(':')[0]);
 
             //Show Portrait
             portraitImg.sprite = talkManager.GetPortrait(id, int.Parse(talkData.Split(':')[1]));
             portraitImg.color = new Color(1, 1, 1, 1);
+            if (prevPortrait != portraitImg.sprite)
+            {
+                portraitAnim.SetTrigger("doEffect");
+                prevPortrait = portraitImg.sprite;
+            }
         }
         else //Npc가 아닐때는 초상화가 투명하게 보이게 해서 있지만 눈에 안보이게
         {
-            talkText.text = talkData; //초상화가 없으니 index번호도 없으니 split없이 그냥 talkData
+            talk.SetMsg(talkData); //초상화가 없으니 index번호도 없으니 split없이 그냥 talkData
 
             portraitImg.color = new Color(1, 1, 1, 0); 
         }
