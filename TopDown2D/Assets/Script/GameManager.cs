@@ -11,14 +11,27 @@ public class GameManager : MonoBehaviour
     public Image portraitImg;
     public Animator portraitAnim;
     public TypeEffect talk;
+    public Text questText;
     public GameObject scanObject;
+    public GameObject menuSet;
     public bool isAction;
     public int talkIndex;
     public Sprite prevPortrait;
 
     void Start()
     {
-        Debug.Log(questManager.CheckQuest());
+        questText.text = questManager.CheckQuest();
+    }
+    void Update()
+    {
+        //Sub Menu
+        if (Input.GetButtonDown("Cancel"))
+        {
+            if (menuSet.activeSelf) //현재 Active상태라면
+                menuSet.SetActive(false);
+            else
+                menuSet.SetActive(true);
+        }
     }
     public void Action(GameObject scanObj)
     {
@@ -48,7 +61,7 @@ public class GameManager : MonoBehaviour
         {
             isAction = false;
             talkIndex = 0;
-            Debug.Log(questManager.CheckQuest(id)); //이어지는 퀘스트를 만들어주기 위해서 questManager의 퀘스트 번호를 증가
+            questText.text = questManager.CheckQuest(id); //이어지는 퀘스트를 만들어주기 위해서 questManager의 퀘스트 번호를 증가
             return;
         }
 
@@ -75,6 +88,14 @@ public class GameManager : MonoBehaviour
 
         isAction = true;
         talkIndex++;
+    }
+    public void GameSave()
+    {
+
+    }
+    public void GameExit()
+    {
+        Application.Quit();
     }
 
 }
