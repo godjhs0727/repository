@@ -14,12 +14,14 @@ public class GameManager : MonoBehaviour
     public Text questText;
     public GameObject scanObject;
     public GameObject menuSet;
+    public GameObject player;
     public bool isAction;
     public int talkIndex;
     public Sprite prevPortrait;
 
     void Start()
     {
+        GameLoad();
         questText.text = questManager.CheckQuest();
     }
     void Update()
@@ -91,7 +93,29 @@ public class GameManager : MonoBehaviour
     }
     public void GameSave()
     {
+        PlayerPrefs.SetFloat("PlayerX", player.transform.position.x); //PlayerPOrefs:간단한 데이터 저장을 지원하는 클래스
+        PlayerPrefs.SetFloat("PlayerY", player.transform.position.y);
+        PlayerPrefs.SetFloat("QuestId", questManager.questId);
+        PlayerPrefs.SetFloat("QuestActionIndex", questManager.questActionIndex);
+        PlayerPrefs.Save();
+        menuSet.SetActive(false);
+        //player.x, player.y
+        //Quest Id
+        //Quest Action Index
+    }
+    public void GameLoad()
+    {
+        if (!PlayerPrefs.HasKey("PlayerX")) //PlayerX를 저장한적이 없으면
+            return;
+        float x = PlayerPrefs.GetFloat("PlayerX");
+        float y = PlayerPrefs.GetFloat("PlayerY");
+        int questId = PlayerPrefs.GetInt("QuestId");
+        int questActionIndex = PlayerPrefs.GetInt("QuestActionIndex");
 
+        player.transform.position = new Vector3(x, y, 0);
+        questManager.questId = questId;
+        questManager.questActionIndex = questActionIndex;
+        questManager.ControlObject();
     }
     public void GameExit()
     {

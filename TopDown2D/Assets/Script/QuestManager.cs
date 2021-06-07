@@ -53,7 +53,7 @@ public class QuestManager : MonoBehaviour
         questId += 10; //questList가 2개 있는데 10만큼 차이가 나서 10+
         questActionIndex = 0; //다시 20의 퀘스트를 처리해야하기 때문에 0으로 초기화
     }
-    void ControlObject()
+    public void ControlObject()
     {
         switch(questId)
         {
@@ -62,6 +62,8 @@ public class QuestManager : MonoBehaviour
                     questObject[0].SetActive(true); //비활성화되었던 코인 보이게 활성화
                 break;
             case 20:
+                if (questActionIndex == 0)
+                    questObject[0].SetActive(true);
                 if (questActionIndex == 1) //동전을 클릭하는 순간
                     questObject[0].SetActive(false); //동전 사라지게
                 break;
