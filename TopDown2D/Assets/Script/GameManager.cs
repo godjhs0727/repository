@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
     public bool isAction;
     public int talkIndex;
     public Sprite prevPortrait;
+    public Text nameText;
 
     void Start()
     {
@@ -29,21 +30,25 @@ public class GameManager : MonoBehaviour
         //Sub Menu
         if (Input.GetButtonDown("Cancel"))
         {
-            if (menuSet.activeSelf) //현재 Active상태라면
-                menuSet.SetActive(false);
-            else
-                menuSet.SetActive(true);
+            SubMenuActive();
         }
+    }
+    public void SubMenuActive()
+    {
+        if (menuSet.activeSelf) //현재 Active상태라면
+            menuSet.SetActive(false);
+        else
+            menuSet.SetActive(true);
     }
     public void Action(GameObject scanObj)
     {
         scanObject = scanObj;
         ObjectData objData = scanObject.GetComponent<ObjectData>();
-        Talk(objData.id, objData.isNpc);
+        Talk(objData.id, objData.isNpc, objData.nameTag);
 
         talkPanel.SetBool("isShow", isAction);
     }
-    void Talk(int id, bool isNpc)
+    void Talk(int id, bool isNpc, string nameTag)
     {
         int questTalkIndex = 0;
         string talkData = "";
@@ -71,6 +76,7 @@ public class GameManager : MonoBehaviour
         if(isNpc)
         {
             talk.SetMsg(talkData.Split(':')[0]);
+            nameText.text = nameTag;
 
             //Show Portrait
             portraitImg.sprite = talkManager.GetPortrait(id, int.Parse(talkData.Split(':')[1]));
@@ -83,6 +89,7 @@ public class GameManager : MonoBehaviour
         }
         else //Npc가 아닐때는 초상화가 투명하게 보이게 해서 있지만 눈에 안보이게
         {
+            nameText.text = "";
             talk.SetMsg(talkData); //초상화가 없으니 index번호도 없으니 split없이 그냥 talkData
 
             portraitImg.color = new Color(1, 1, 1, 0); 

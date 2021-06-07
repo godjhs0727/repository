@@ -5,5 +5,6 @@ using UnityEngine;
 public class ObjectData : MonoBehaviour
 {
     public int id;
+    public string nameTag;
     public bool isNpc;
 }
