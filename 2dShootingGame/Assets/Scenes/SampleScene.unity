@@ -459,6 +459,7 @@ MonoBehaviour:
   - {fileID: 569140044}
   maxSpawnDelay: 2
   curSpawnDelay: 0
+  player: {fileID: 970778472}
 --- !u!4 &499614044
 Transform:
   m_ObjectHideFlags: 0
@@ -659,6 +660,7 @@ MonoBehaviour:
   curShotDelay: 0
   bulletObjA: {fileID: 5235173847832130212, guid: d543cb10cc239714b860d9f5bceb8c42, type: 3}
   bulletObjB: {fileID: 4290921758601706930, guid: 3557b0ea4bdab314485ef3da5575cfbf, type: 3}
+  manager: {fileID: 499614043}
 --- !u!212 &970778474
 SpriteRenderer:
   m_ObjectHideFlags: 0

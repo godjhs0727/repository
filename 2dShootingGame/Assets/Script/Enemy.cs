@@ -4,14 +4,69 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    public string enemyName;
     public float speed;
     public int health;
     public Sprite[] sprites;
     SpriteRenderer spriteRenderer;
 
+    public float maxShotDelay;
+    public float curShotDelay;
+
+    public GameObject bulletObjA;
+    public GameObject bulletObjB;
+
+    public GameObject player;
+
     void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+    }
+    void Update()
+    {
+        Fire();
+        Reroad();
+    }
+    void Fire()
+    {
+        if (curShotDelay < maxShotDelay)
+            return;
+
+        if(enemyName == "S")
+        {
+            GameObject bullet = Instantiate(bulletObjA, transform.position, transform.rotation); //Destroy와 반대, 생성
+            Rigidbody2D rigid = bullet.GetComponent<Rigidbody2D>();
+
+            Vector3 dirVec = player.transform.position - transform.position;
+            rigid.AddForce(dirVec.normalized * 3, ForceMode2D.Impulse);
+        }
+        else if(enemyName == "M")
+        {
+            GameObject bullet = Instantiate(bulletObjB, transform.position, transform.rotation); //Destroy와 반대, 생성
+            Rigidbody2D rigid = bullet.GetComponent<Rigidbody2D>();
+
+            Vector3 dirVec = player.transform.position - transform.position;
+            rigid.AddForce(dirVec.normalized * 4, ForceMode2D.Impulse);
+        }
+        else if(enemyName == "L")
+        {
+            GameObject bulletR = Instantiate(bulletObjB, transform.position + Vector3.right * 0.3f, transform.rotation); ; //Destroy와 반대, 생성
+            GameObject bulletL = Instantiate(bulletObjB, transform.position + Vector3.left * 0.3f, transform.rotation); //Destroy와 반대, 생성
+            Rigidbody2D rigidR = bulletR.GetComponent<Rigidbody2D>();
+            Rigidbody2D rigidL = bulletL.GetComponent<Rigidbody2D>();
+
+            Vector3 dirVecR = player.transform.position - (transform.position + Vector3.right * 0.3f);
+            Vector3 dirVecL = player.transform.position - (transform.position + Vector3.left * 0.3f);
+            rigidR.AddForce(dirVecR.normalized * 4, ForceMode2D.Impulse);
+            rigidL.AddForce(dirVecL.normalized * 4, ForceMode2D.Impulse);
+        }
+
+        curShotDelay = 0;
+    }
+    void Reroad()
+    {
+        curShotDelay += Time.deltaTime; //딜레이 변수에 Time.deltaTime을 계속 더하여 시간계산
+
     }
 
     void OnHit(int dmg)
