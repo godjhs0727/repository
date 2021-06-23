@@ -9,6 +9,8 @@ public class Player : MonoBehaviour
     public bool isTouchRight;
     public bool isTouchLeft;
 
+    public int life;
+    public int score;
     public float speed;
     public float power;
     public float maxShotDelay;
