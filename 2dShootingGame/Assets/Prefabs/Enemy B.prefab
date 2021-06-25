@@ -150,6 +150,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyName: M
+  enemyScore: 30
   speed: 5
   health: 5
   sprites:
