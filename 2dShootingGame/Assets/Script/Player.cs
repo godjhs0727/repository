@@ -12,15 +12,21 @@ public class Player : MonoBehaviour
     public int life;
     public int score;
     public float speed;
-    public float power;
+    public int maxPower;
+    public int power;
+    public int maxBoom;
+    public int boom;
+
     public float maxShotDelay;
     public float curShotDelay;
 
     public GameObject bulletObjA;
     public GameObject bulletObjB;
+    public GameObject boomEffect;
 
     public GameManager manager;
     public bool isHit;
+    public bool isBoomTime;
 
     Animator anim;
 
@@ -33,6 +39,7 @@ public class Player : MonoBehaviour
     {
         Move();
         Fire();
+        Boom();
         Reroad();
     }
     void Move()
@@ -96,6 +103,38 @@ public class Player : MonoBehaviour
         curShotDelay += Time.deltaTime; //딜레이 변수에 Time.deltaTime을 계속 더하여 시간계산
 
     }
+    void Boom()
+    {
+        if (!Input.GetButton("Fire2"))
+            return;
+        if (isBoomTime)
+            return;
+        if (boom == 0)
+            return;
+        boom--;
+        isBoomTime = true;
+        manager.UpdateBoomIcon(boom);
+
+        //#1.Effect visible
+        boomEffect.SetActive(true);
+        Invoke("OffBoomEffect", 3);
+
+        //#2.Remove Enemy
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        for (int index = 0; index < enemies.Length; index++)
+        {
+            Enemy enemyLogic = enemies[index].GetComponent<Enemy>();
+            enemyLogic.OnHit(1000);
+        }
+
+        //#3.Remove EnemyBullet
+        GameObject[] bullets = GameObject.FindGameObjectsWithTag("EnemyBullet");
+        for (int index = 0; index < bullets.Length; index++)
+        {
+            Destroy(bullets[index]);
+        }
+
+    }
     void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.gameObject.tag == "Border")
@@ -135,6 +174,38 @@ public class Player : MonoBehaviour
             gameObject.SetActive(false);
             Destroy(collision.gameObject);
         }
+        else if(collision.gameObject.tag == "Item")
+        {
+            Item item = collision.GetComponent<Item>();
+            switch(item.type)
+            {
+                case "Coin":
+                    score += 1000;
+                    break;
+                case "Power":
+                    if (power == maxPower)
+                        score += 500;
+                    else
+                        power++;
+                    break;
+                case "Boom":
+                    if (boom == maxBoom)
+                        score += 500;
+                    else
+                    {
+                        boom++;
+                        manager.UpdateBoomIcon(boom);
+                    }
+                    break;
+            }
+            Destroy(collision.gameObject);
+        }
+    }
+
+    void OffBoomEffect()
+    {
+        boomEffect.SetActive(false);
+        isBoomTime = false;
     }
     void OnTriggerExit2D(Collider2D collision)
     {
