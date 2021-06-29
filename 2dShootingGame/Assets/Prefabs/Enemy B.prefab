@@ -152,7 +152,7 @@ MonoBehaviour:
   enemyName: M
   enemyScore: 30
   speed: 5
-  health: 5
+  health: 10
   sprites:
   - {fileID: -1147401495359466748, guid: 138040323294fd440a3a823e5d70ad01, type: 3}
   - {fileID: -7844560889915226194, guid: 138040323294fd440a3a823e5d70ad01, type: 3}
@@ -164,3 +164,4 @@ MonoBehaviour:
   ItemCoin: {fileID: 7753763189441001914, guid: f2cc88fffe326c94fb207a014de422ca, type: 3}
   ItemPower: {fileID: 8921362771550479243, guid: a0248f8c6db49d4449917478de01ca87, type: 3}
   player: {fileID: 0}
+  objectManager: {fileID: 0}

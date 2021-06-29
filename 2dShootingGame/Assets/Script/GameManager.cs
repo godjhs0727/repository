@@ -4,10 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-
 public class GameManager : MonoBehaviour
 {
-    public GameObject[] enemyObjs;
+    public string[] enemyObjs;
     public Transform[] spawnPoints;
 
     public float maxSpawnDelay;
@@ -19,6 +18,12 @@ public class GameManager : MonoBehaviour
     public Image[] boomImage;
 
     public GameObject gameOverSet;
+    public ObjectManager objectManager;
+
+    void Awake()
+    {
+        enemyObjs = new string[] { "EnemyS", "EnemyM", "EnemyL" };
+    }
     void Update()
     {
         curSpawnDelay += Time.deltaTime;
@@ -36,12 +41,13 @@ public class GameManager : MonoBehaviour
     {
         int ranEnemy = Random.Range(0, 3);
         int ranPoint = Random.Range(0, 9);
-        GameObject enemy = Instantiate(enemyObjs[ranEnemy],
-                                       spawnPoints[ranPoint].position,
-                                       spawnPoints[ranPoint].rotation);
+        GameObject enemy = objectManager.MakeObj(enemyObjs[ranEnemy]);
+        enemy.transform.position = spawnPoints[ranPoint].position;    
+
         Rigidbody2D rigid = enemy.GetComponent<Rigidbody2D>();
         Enemy enemyLogic = enemy.GetComponent<Enemy>();
         enemyLogic.player = player;
+        enemyLogic.objectManager = objectManager;
         if (ranPoint == 5 || ranPoint == 6)
         {
             enemy.transform.Rotate(Vector3.back * 45);
@@ -95,8 +101,8 @@ public class GameManager : MonoBehaviour
         player.SetActive(true);
 
         Player playerLogic = player.GetComponent<Player>();
-        playerLogic.isHit = false;
         playerLogic.power = 1;
+        playerLogic.isHit = false;
     }
     public void GameOver()
     {
