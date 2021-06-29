@@ -62,6 +62,7 @@
     <Compile Include="Assets\Script\Player.cs" />
     <Compile Include="Assets\Vertical 2D Shooting BE4\ReadMe\Scripts\ReadmeBE4.cs" />
     <Compile Include="Assets\Script\Item.cs" />
+    <Compile Include="Assets\Script\Background.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

@@ -96,6 +96,7 @@ public class GameManager : MonoBehaviour
 
         Player playerLogic = player.GetComponent<Player>();
         playerLogic.isHit = false;
+        playerLogic.power = 1;
     }
     public void GameOver()
     {

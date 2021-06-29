@@ -85,16 +85,71 @@ public class Player : MonoBehaviour
                 break;
             case 3:
                 GameObject bulletRR = Instantiate(bulletObjA, transform.position + Vector3.right * 0.35f, transform.rotation); //Destroy客 馆措, 积己
-                GameObject bulletCC = Instantiate(bulletObjB, transform.position, transform.rotation);
+                GameObject bulletC = Instantiate(bulletObjB, transform.position, transform.rotation);
                 GameObject bulletLL = Instantiate(bulletObjA, transform.position + Vector3.left * 0.35f, transform.rotation);
                 Rigidbody2D rigidRR = bulletRR.GetComponent<Rigidbody2D>();
-                Rigidbody2D rigidCC = bulletCC.GetComponent<Rigidbody2D>();
+                Rigidbody2D rigidC = bulletC.GetComponent<Rigidbody2D>();
                 Rigidbody2D rigidLL = bulletLL.GetComponent<Rigidbody2D>();
                 rigidRR.AddForce(Vector2.up * 10, ForceMode2D.Impulse);
-                rigidCC.AddForce(Vector2.up * 10, ForceMode2D.Impulse);
+                rigidC.AddForce(Vector2.up * 10, ForceMode2D.Impulse);
                 rigidLL.AddForce(Vector2.up * 10, ForceMode2D.Impulse);
                 break;
-
+            case 4:
+                GameObject bulletR2 = Instantiate(bulletObjB, transform.position + Vector3.right * 0.35f, transform.rotation); //Destroy客 馆措, 积己
+                GameObject bulletCC = Instantiate(bulletObjA, transform.position, transform.rotation);
+                GameObject bulletL2 = Instantiate(bulletObjB, transform.position + Vector3.left * 0.35f, transform.rotation);
+                Rigidbody2D rigidR2 = bulletR2.GetComponent<Rigidbody2D>();
+                Rigidbody2D rigidCC = bulletCC.GetComponent<Rigidbody2D>();
+                Rigidbody2D rigidL2 = bulletL2.GetComponent<Rigidbody2D>();
+                rigidR2.AddForce(Vector2.up * 10, ForceMode2D.Impulse);
+                rigidCC.AddForce(Vector2.up * 10, ForceMode2D.Impulse);
+                rigidL2.AddForce(Vector2.up * 10, ForceMode2D.Impulse);
+                break;
+            case 5:
+                GameObject bulletR3 = Instantiate(bulletObjB, transform.position + Vector3.right * 0.35f, transform.rotation); //Destroy客 馆措, 积己
+                GameObject bulletC3 = Instantiate(bulletObjB, transform.position, transform.rotation);
+                GameObject bulletL3 = Instantiate(bulletObjB, transform.position + Vector3.left * 0.35f, transform.rotation);
+                Rigidbody2D rigidR3 = bulletR3.GetComponent<Rigidbody2D>();
+                Rigidbody2D rigidC3 = bulletC3.GetComponent<Rigidbody2D>();
+                Rigidbody2D rigidL3 = bulletL3.GetComponent<Rigidbody2D>();
+                rigidR3.AddForce(Vector2.up * 10, ForceMode2D.Impulse);
+                rigidC3.AddForce(Vector2.up * 10, ForceMode2D.Impulse);
+                rigidL3.AddForce(Vector2.up * 10, ForceMode2D.Impulse);
+                break;
+            case 6:
+                GameObject bulletR4 = Instantiate(bulletObjB, transform.position + Vector3.right * 0.35f, transform.rotation); //Destroy客 馆措, 积己
+                GameObject bulletRR4 = Instantiate(bulletObjA, transform.position + Vector3.right * 0.7f, transform.rotation); //Destroy客 馆措, 积己
+                GameObject bulletC4 = Instantiate(bulletObjB, transform.position, transform.rotation);
+                GameObject bulletL4 = Instantiate(bulletObjB, transform.position + Vector3.left * 0.35f, transform.rotation);
+                GameObject bulletLL4 = Instantiate(bulletObjA, transform.position + Vector3.left * 0.7f, transform.rotation);
+                Rigidbody2D rigidR4 = bulletR4.GetComponent<Rigidbody2D>();
+                Rigidbody2D rigidRR4 = bulletRR4.GetComponent<Rigidbody2D>();
+                Rigidbody2D rigidC4 = bulletC4.GetComponent<Rigidbody2D>();
+                Rigidbody2D rigidL4 = bulletL4.GetComponent<Rigidbody2D>();
+                Rigidbody2D rigidLL4 = bulletLL4.GetComponent<Rigidbody2D>();
+                rigidR4.AddForce(Vector2.up * 10, ForceMode2D.Impulse);
+                rigidRR4.AddForce(Vector2.up * 10, ForceMode2D.Impulse);
+                rigidC4.AddForce(Vector2.up * 10, ForceMode2D.Impulse);
+                rigidL4.AddForce(Vector2.up * 10, ForceMode2D.Impulse);
+                rigidLL4.AddForce(Vector2.up * 10, ForceMode2D.Impulse);
+                break;
+            case 7:
+                GameObject bulletR5 = Instantiate(bulletObjB, transform.position + Vector3.right * 0.35f, transform.rotation); //Destroy客 馆措, 积己
+                GameObject bulletRR5 = Instantiate(bulletObjB, transform.position + Vector3.right * 0.7f, transform.rotation); //Destroy客 馆措, 积己
+                GameObject bulletC5 = Instantiate(bulletObjB, transform.position, transform.rotation);
+                GameObject bulletL5 = Instantiate(bulletObjB, transform.position + Vector3.left * 0.35f, transform.rotation);
+                GameObject bulletLL5 = Instantiate(bulletObjB, transform.position + Vector3.left * 0.7f, transform.rotation);
+                Rigidbody2D rigidR5 = bulletR5.GetComponent<Rigidbody2D>();
+                Rigidbody2D rigidRR5 = bulletRR5.GetComponent<Rigidbody2D>();
+                Rigidbody2D rigidC5 = bulletC5.GetComponent<Rigidbody2D>();
+                Rigidbody2D rigidL5 = bulletL5.GetComponent<Rigidbody2D>();
+                Rigidbody2D rigidLL5 = bulletLL5.GetComponent<Rigidbody2D>();
+                rigidR5.AddForce(Vector2.up * 10, ForceMode2D.Impulse);
+                rigidRR5.AddForce(Vector2.up * 10, ForceMode2D.Impulse);
+                rigidC5.AddForce(Vector2.up * 10, ForceMode2D.Impulse);
+                rigidL5.AddForce(Vector2.up * 10, ForceMode2D.Impulse);
+                rigidLL5.AddForce(Vector2.up * 10, ForceMode2D.Impulse);
+                break;
         }
         curShotDelay = 0;
     }
