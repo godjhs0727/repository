@@ -58,13 +58,14 @@
   <ItemGroup>
     <Compile Include="Assets\Script\Background.cs" />
     <Compile Include="Assets\Script\GameManager.cs" />
+    <Compile Include="Assets\Script\Spawn.cs" />
     <Compile Include="Assets\Script\ObjectManager.cs" />
     <Compile Include="Assets\Script\Bullet.cs" />
     <Compile Include="Assets\Script\Enemy.cs" />
     <Compile Include="Assets\Script\Player.cs" />
     <Compile Include="Assets\Vertical 2D Shooting BE4\ReadMe\Scripts\ReadmeBE4.cs" />
     <Compile Include="Assets\Script\Item.cs" />
-    <Compile Include="Assets\Script\Spawn.cs" />
+    <Compile Include="Assets\Script\Follower.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\Resources\Stage0.txt" />
