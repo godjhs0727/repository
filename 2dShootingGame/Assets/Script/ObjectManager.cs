@@ -245,4 +245,18 @@ public class ObjectManager : MonoBehaviour
         }
                 return targetPool;
     }
+    public void DeleteAllObj(string type)
+    {
+        if(type == "EnemyB")
+        {
+            for (int index = 0; index < bulletBossA.Length; index++)
+                bulletBossA[index].SetActive(false);
+            for (int index = 0; index < bulletBossB.Length; index++)
+                bulletBossB[index].SetActive(false);
+            for (int index = 0; index < bulletEnemyA.Length; index++)
+                bulletEnemyA[index].SetActive(false);
+            for (int index = 0; index < bulletEnemyB.Length; index++)
+                bulletEnemyB[index].SetActive(false);
+        }
+    }
 }

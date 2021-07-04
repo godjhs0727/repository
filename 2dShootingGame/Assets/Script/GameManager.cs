@@ -99,6 +99,8 @@ public class GameManager : MonoBehaviour
         Enemy enemyLogic = enemy.GetComponent<Enemy>();
         enemyLogic.player = player;
         enemyLogic.objectManager = objectManager;
+        if(spawnList[spawnIndex].type != "B")
+            enemyLogic.ReturnSprite();
         if (enemyPoint == 5 || enemyPoint == 6)
         {//#.Right Spawn
             enemy.transform.Rotate(Vector3.back * 45);

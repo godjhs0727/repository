@@ -30,13 +30,42 @@ public class Player : MonoBehaviour
     public bool isBoomTime;
 
     public GameObject[] followers;
+    public bool isRespawnTime;
 
     Animator anim;
-
+    SpriteRenderer spriteRenderer;
 
     void Awake()
     {
-        anim = GetComponent<Animator>();   
+        anim = GetComponent<Animator>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+    }
+    void OnEnable()
+    {
+        Unbeatable();
+        Invoke("Unbeatable", 3);
+    }
+    void Unbeatable()
+    {
+        isRespawnTime = !isRespawnTime;
+        
+        if(isRespawnTime) //#.무적 타임 이펙트(투명)
+        {
+            spriteRenderer.color = new Color(1, 1, 1, 0.5f);
+            for(int index = 0; index < followers.Length;index++)
+            {
+                followers[index].GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 0.5f);
+            }
+        }
+        else //#.무적 타임 종료(원래대로)
+        {
+            spriteRenderer.color = new Color(1, 1, 1, 1);
+            spriteRenderer.color = new Color(1, 1, 1, 1);
+            for (int index = 0; index < followers.Length; index++)
+            {
+                followers[index].GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1);
+            }
+        }    
     }
     void Update()
     {
@@ -279,6 +308,9 @@ public class Player : MonoBehaviour
         }
         else if(collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "EnemyBullet")
         {
+            if (isRespawnTime)
+                return;
+
             if (isHit)
                 return;
             isHit = true;
@@ -294,7 +326,15 @@ public class Player : MonoBehaviour
                 gameManger.RespawnPlayer();
             }
             gameObject.SetActive(false);
-            collision.gameObject.SetActive(false);
+            if(collision.gameObject.tag == "Enemy")
+            {
+                GameObject bossGo = collision.gameObject;
+                Enemy enemyBoss = bossGo.GetComponent<Enemy>();
+                if (enemyBoss.enemyName == "B")
+                    return;
+                else
+                    collision.gameObject.SetActive(false);
+            }
         }
         else if(collision.gameObject.tag == "Item")
         {

@@ -89,6 +89,8 @@ public class Enemy : MonoBehaviour
 
     void FireFoward()
     {
+        if (health <= 0)
+            return;
         //#.Fire 4 Bullet Foward
         GameObject bulletR = objectManager.MakeObj("BulletBossA");
         bulletR.transform.position = transform.position + Vector3.right * 0.3f; 
@@ -117,6 +119,8 @@ public class Enemy : MonoBehaviour
     }
     void FireShot()
     {
+        if (health <= 0)
+            return;
         //#.Fire 5 Random Shotgun Bullet to Player
         for (int index = 0; index < 5; index++)
         {
@@ -138,6 +142,8 @@ public class Enemy : MonoBehaviour
     }
     void FireArc()
     {
+        if (health <= 0)
+            return;
         //#.Fire 6 Arc Continue Fire
         GameObject bullet = objectManager.MakeObj("BulletEnemyA");
         bullet.transform.position = transform.position;
@@ -155,6 +161,8 @@ public class Enemy : MonoBehaviour
     }
     void FireAround()
     {
+        if (health <= 0)
+            return;
         //#.Fire 7 Around
         int roundNumA = 50;
         int roundNumB = 40;
@@ -238,7 +246,6 @@ public class Enemy : MonoBehaviour
     {
         if (health <= 0)
             return;
-
         health -= dmg;
         if (enemyName == "B")
         {
@@ -276,11 +283,13 @@ public class Enemy : MonoBehaviour
                 GameObject itemBoom = objectManager.MakeObj("ItemBoom");
                 itemBoom.transform.position = transform.position;              
             }
+            CancelInvoke();
+            objectManager.DeleteAllObj("EnemyB");
             gameObject.SetActive(false);
             transform.rotation = Quaternion.identity; //Quaternion.identity : 기본회전값 = 0
         }
     }
-    void ReturnSprite()
+    public void ReturnSprite()
     {
         spriteRenderer.sprite = sprites[0];
     }
