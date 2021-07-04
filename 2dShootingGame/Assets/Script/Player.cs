@@ -203,6 +203,7 @@ public class Player : MonoBehaviour
         GameObject[] enemiesL = objectManager.GetPool("EnemyL");
         GameObject[] enemiesM = objectManager.GetPool("EnemyM");
         GameObject[] enemiesS = objectManager.GetPool("EnemyS");
+        GameObject[] enemiesB = objectManager.GetPool("EnemyB");
 
         for (int index = 0; index < enemiesL.Length; index++)
         {
@@ -226,6 +227,14 @@ public class Player : MonoBehaviour
             {
                 Enemy enemyLogic = enemiesS[index].GetComponent<Enemy>();
                 enemyLogic.OnHit(1000);
+            }
+        }
+        for (int index = 0; index < enemiesB.Length; index++)
+        {
+            if (enemiesB[index].activeSelf)
+            {
+                Enemy enemyLogic = enemiesB[index].GetComponent<Enemy>();
+                enemyLogic.OnHit(3000);
             }
         }
 

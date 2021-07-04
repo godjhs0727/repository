@@ -2875,6 +2875,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7a29eb435b9b7342803059785828756, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyBPrefeb: {fileID: 7084058689301900975, guid: 033bd3a19383eef4eac6d7fa8d6b6b96, type: 3}
   enemyLPrefeb: {fileID: 4494358577999167825, guid: 67bdb2203d5f4e34faf800b444aa25be, type: 3}
   enemyMPrefeb: {fileID: 5396737734935666607, guid: d35ec301d80840544bd3710cbef64754, type: 3}
   enemySPrefeb: {fileID: 4505455998596581130, guid: 95a44ff8d6cefa9498ab49d5caa1bded, type: 3}
@@ -2886,6 +2887,8 @@ MonoBehaviour:
   bulletEnemyAPrefeb: {fileID: 4290921758601706930, guid: 0b5d4d7378a1f8c4bb0f466c0e1f0e3b, type: 3}
   bulletEnemyBPrefeb: {fileID: 4290921758601706930, guid: f48c9ce01eaa7f541a2940b9efcd990e, type: 3}
   bulletFollowerPrefeb: {fileID: 5235173847832130212, guid: 554e7a1de4bc5ce49a68163c6fecb569, type: 3}
+  bulletBossAPrefeb: {fileID: 4290921758601706930, guid: 696d5785bea6434458e7dc09b0c0c4aa, type: 3}
+  bulletBossBPrefeb: {fileID: 4290921758601706930, guid: 4ff3c53b50fe5664f879484c6f9b2d62, type: 3}
 --- !u!4 &1451370543
 Transform:
   m_ObjectHideFlags: 0
