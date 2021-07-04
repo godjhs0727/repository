@@ -316,6 +316,7 @@ public class Player : MonoBehaviour
             isHit = true;
             life--;
             gameManger.UpdateLifeIcon(life);
+            gameManger.CallExplosion(transform.position, "P");
 
             if(life == 0)
             {

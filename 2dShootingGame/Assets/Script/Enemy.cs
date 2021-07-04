@@ -18,6 +18,7 @@ public class Enemy : MonoBehaviour
     public GameObject ItemBoom;
     public GameObject ItemCoin;
     public GameObject ItemPower;
+    public GameManager gameManager;
 
     public GameObject player;
     public ObjectManager objectManager;
@@ -287,6 +288,7 @@ public class Enemy : MonoBehaviour
             objectManager.DeleteAllObj("EnemyB");
             gameObject.SetActive(false);
             transform.rotation = Quaternion.identity; //Quaternion.identity : 기본회전값 = 0
+            gameManager.CallExplosion(transform.position, enemyName);
         }
     }
     public void ReturnSprite()

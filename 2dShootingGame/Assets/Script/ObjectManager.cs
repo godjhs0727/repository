@@ -18,6 +18,7 @@ public class ObjectManager : MonoBehaviour
     public GameObject bulletFollowerPrefeb;
     public GameObject bulletBossAPrefeb;
     public GameObject bulletBossBPrefeb;
+    public GameObject explosionPrefeb;
 
 
     GameObject[] enemyB;
@@ -33,9 +34,10 @@ public class ObjectManager : MonoBehaviour
     GameObject[] bulletPlayerB;
     GameObject[] bulletEnemyA;
     GameObject[] bulletEnemyB;
+    GameObject[] bulletFollower;
     GameObject[] bulletBossA;
     GameObject[] bulletBossB;
-    GameObject[] bulletFollower;
+    GameObject[] explosion;
     
     GameObject[] targetPool;
 
@@ -57,6 +59,7 @@ public class ObjectManager : MonoBehaviour
         bulletFollower = new GameObject[100];
         bulletBossA = new GameObject[50];
         bulletBossB = new GameObject[1000];
+        explosion = new GameObject[20];
 
         Generate();
     }
@@ -137,6 +140,13 @@ public class ObjectManager : MonoBehaviour
             bulletBossB[index] = Instantiate(bulletBossBPrefeb);
             bulletBossB[index].SetActive(false);
         }
+        
+        //#.Explosion
+        for (int index = 0; index < explosion.Length; index++)
+        {
+            explosion[index] = Instantiate(explosionPrefeb);
+            explosion[index].SetActive(false);
+        }
     }
     public GameObject MakeObj(string type)
     {
@@ -184,6 +194,9 @@ public class ObjectManager : MonoBehaviour
                 break;
             case "BulletFollower":
                 targetPool = bulletFollower;
+                break;
+            case "Explosion":
+                targetPool = explosion;
                 break;
         }
         for (int index = 0; index < targetPool.Length; index++)
@@ -241,6 +254,9 @@ public class ObjectManager : MonoBehaviour
                 break;
             case "BulletFollower":
                 targetPool = bulletFollower;
+                break;
+            case "Explosion":
+                targetPool = explosion;
                 break;
         }
                 return targetPool;

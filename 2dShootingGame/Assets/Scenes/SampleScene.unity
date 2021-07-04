@@ -2893,6 +2893,7 @@ MonoBehaviour:
   bulletFollowerPrefeb: {fileID: 5235173847832130212, guid: 554e7a1de4bc5ce49a68163c6fecb569, type: 3}
   bulletBossAPrefeb: {fileID: 4290921758601706930, guid: 696d5785bea6434458e7dc09b0c0c4aa, type: 3}
   bulletBossBPrefeb: {fileID: 4290921758601706930, guid: 4ff3c53b50fe5664f879484c6f9b2d62, type: 3}
+  explosionPrefeb: {fileID: 8957953530888528133, guid: 63f53bc6f295d384d80407553619ea08, type: 3}
 --- !u!4 &1451370543
 Transform:
   m_ObjectHideFlags: 0
