@@ -32,6 +32,11 @@ public class Player : MonoBehaviour
     public GameObject[] followers;
     public bool isRespawnTime;
 
+    public bool[] joyControl;
+    public bool isControl;
+    public bool isButtonA;
+    public bool isButtonB;
+
     Animator anim;
     SpriteRenderer spriteRenderer;
 
@@ -74,13 +79,43 @@ public class Player : MonoBehaviour
         Boom();
         Reroad();
     }
+    public void JoyPanel(int type)
+    {
+        for(int index = 0; index<9; index++)
+        {
+            joyControl[index] = index == type;
+        }
+    }
+    public void JoyDown()
+    {
+        isControl = true;
+    }
+    public void JoyUp()
+    {
+        isControl = false;
+    }
+
     void Move()
     {
+        //#.Keyboard Control Value
         float h = Input.GetAxisRaw("Horizontal");
-        if ((h == 1 && isTouchRight) || (h == -1 && isTouchLeft))
-            h = 0;
         float v = Input.GetAxisRaw("Vertical");
-        if ((v == 1 && isTouchTop) || (v == -1 && isTouchBottom))
+
+        //#.Joy Control Value
+        if (joyControl[0]) { h = -1; v = 1; }
+        if (joyControl[1]) { h = 0; v = 1; }
+        if (joyControl[2]) { h = 1; v = 1; }
+        if (joyControl[3]) { h = -1; v = 0; }
+        if (joyControl[4]) { h = 0; v = 0; }
+        if (joyControl[5]) { h = 1; v = 0; }
+        if (joyControl[6]) { h = -1; v = -1; }
+        if (joyControl[7]) { h = 0; v = -1; }
+        if (joyControl[8]) { h = 1; v = -1; }
+
+
+        if ((h == 1 && isTouchRight) || (h == -1 && isTouchLeft) || !isControl)
+            h = 0;
+        if ((v == 1 && isTouchTop) || (v == -1 && isTouchBottom) || !isControl)
             v = 0;
         Vector3 curPos = transform.position;
         Vector3 nextPos = new Vector3(h, v, 0) * speed * Time.deltaTime; //transform 이동에는 Time.DeltaTime꼭 사용하기
@@ -92,10 +127,27 @@ public class Player : MonoBehaviour
             anim.SetInteger("Input", (int)h);
         }
     }
+    
+    public void ButtonADown()
+    {
+        isButtonA = true;
+    }
+    public void ButtonAUp()
+    {
+        isButtonA = false;
+    }
+    public void ButtonBDown()
+    {
+        isButtonB = true;
+    }
     void Fire()
     {
-        if (!Input.GetButton("Fire1"))
+        //if (!Input.GetButton("Fire1"))
+        //    return;
+
+        if (!isButtonA)
             return;
+        
         if (curShotDelay < maxShotDelay)
             return;
 
@@ -214,13 +266,18 @@ public class Player : MonoBehaviour
     }
     void Boom()
     {
-        if (!Input.GetButton("Fire2"))
+        //if (!Input.GetButton("Fire2"))
+        //    return;
+
+        if (!isButtonB)
             return;
+        
         if (isBoomTime)
             return;
         if (boom == 0)
             return;
         boom--;
+        isButtonB = false;
         isBoomTime = true;
         gameManger.UpdateBoomIcon(boom);
 
