@@ -289,6 +289,10 @@ public class Enemy : MonoBehaviour
             gameObject.SetActive(false);
             transform.rotation = Quaternion.identity; //Quaternion.identity : 기본회전값 = 0
             gameManager.CallExplosion(transform.position, enemyName);
+
+            //#.Boss Kill
+            if (enemyName == "B")
+                gameManager.StageEnd();
         }
     }
     public void ReturnSprite()

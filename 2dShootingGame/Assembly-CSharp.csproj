@@ -60,16 +60,17 @@
     <Compile Include="Assets\Script\GameManager.cs" />
     <Compile Include="Assets\Script\Spawn.cs" />
     <Compile Include="Assets\Script\ObjectManager.cs" />
+    <Compile Include="Assets\Script\Explosion.cs" />
     <Compile Include="Assets\Script\Bullet.cs" />
     <Compile Include="Assets\Script\Enemy.cs" />
     <Compile Include="Assets\Script\Player.cs" />
     <Compile Include="Assets\Vertical 2D Shooting BE4\ReadMe\Scripts\ReadmeBE4.cs" />
     <Compile Include="Assets\Script\Item.cs" />
     <Compile Include="Assets\Script\Follower.cs" />
-    <Compile Include="Assets\Script\Explosion.cs" />
   </ItemGroup>
   <ItemGroup>
-     <None Include="Assets\Resources\Stage0.txt" />
+     <None Include="Assets\Resources\Stage 1.txt" />
+     <None Include="Assets\Resources\Stage 2.txt" />
     <Reference Include="UnityEngine">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2020.3.4f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
     </Reference>

@@ -113,9 +113,9 @@ public class Player : MonoBehaviour
         if (joyControl[8]) { h = 1; v = -1; }
 
 
-        if ((h == 1 && isTouchRight) || (h == -1 && isTouchLeft) || !isControl)
+        if ((h == 1 && isTouchRight) || (h == -1 && isTouchLeft) /*|| !isControl*/)
             h = 0;
-        if ((v == 1 && isTouchTop) || (v == -1 && isTouchBottom) || !isControl)
+        if ((v == 1 && isTouchTop) || (v == -1 && isTouchBottom) /*|| !isControl*/)
             v = 0;
         Vector3 curPos = transform.position;
         Vector3 nextPos = new Vector3(h, v, 0) * speed * Time.deltaTime; //transform 이동에는 Time.DeltaTime꼭 사용하기
