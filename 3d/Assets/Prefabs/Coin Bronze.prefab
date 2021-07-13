@@ -4993,7 +4993,7 @@ GameObject:
   - component: {fileID: 1602731191526321045}
   m_Layer: 0
   m_Name: Coin Bronze
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5069,5 +5069,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2219d866cda31354299f22df1145fb52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 0
-  value: 0
+  type: 1
+  value: 10
