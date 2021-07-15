@@ -61,6 +61,7 @@
     <Compile Include="Assets\Script\Player.cs" />
     <Compile Include="Assets\Script\Follow.cs" />
     <Compile Include="Assets\Script\Orbit.cs" />
+    <Compile Include="Assets\Script\Weapon.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
