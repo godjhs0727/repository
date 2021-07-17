@@ -38,6 +38,7 @@ public class Player : MonoBehaviour
     bool isSwap;
     bool isReload;
     bool isFireReady = true;
+    bool isBorder;
 
     Vector3 moveVec;
     Vector3 dodgeVec;
@@ -74,7 +75,7 @@ public class Player : MonoBehaviour
         wDown = Input.GetButton("Walk");
         jDown = Input.GetButtonDown("Jump");
         fDown = Input.GetButton("Fire1");
-        rDown = Input.GetButtonDown("Reload");        
+        rDown = Input.GetButtonDown("Reload");
         iDown = Input.GetButtonDown("Interation");
         sDown1 = Input.GetButtonDown("Swap1");
         sDown2 = Input.GetButtonDown("Swap2");
@@ -88,7 +89,8 @@ public class Player : MonoBehaviour
 
         if (isSwap || isReload || !isFireReady)
             moveVec = Vector3.zero;
-        transform.position += moveVec * speed * (wDown ? 0.3f : 1f) * Time.deltaTime;
+        if (!isBorder)
+            transform.position += moveVec * speed * (wDown ? 0.3f : 1f) * Time.deltaTime;
 
         anim.SetBool("isRun", moveVec != Vector3.zero);
         anim.SetBool("isWalk", wDown);
@@ -112,7 +114,7 @@ public class Player : MonoBehaviour
     }
     void Jump()
     {
-        if(jDown && moveVec == Vector3.zero && !isJump && !isDodge && !isSwap)
+        if (jDown && moveVec == Vector3.zero && !isJump && !isDodge && !isSwap)
         {
             rigid.AddForce(Vector3.up * 15, ForceMode.Impulse);
             anim.SetBool("isJump", true);
@@ -128,7 +130,7 @@ public class Player : MonoBehaviour
         fireDelay += Time.deltaTime;
         isFireReady = equipWeapon.rate < fireDelay;
 
-        if(fDown && isFireReady && !isDodge && !isSwap)
+        if (fDown && isFireReady && !isDodge && !isSwap)
         {
             equipWeapon.Use();
             anim.SetTrigger(equipWeapon.type == Weapon.Type.Melee ? "doSwing" : "doShot");
@@ -136,7 +138,7 @@ public class Player : MonoBehaviour
         }
     }
     void Reload()
-    {        
+    {
         if (equipWeapon == null)
             return;
         if (equipWeapon.type == Weapon.Type.Melee)
@@ -189,7 +191,7 @@ public class Player : MonoBehaviour
         if (sDown3) weaponIndex = 2;
         if ((sDown1 || sDown2 || sDown3) && !isJump && !isDodge)
         {
-            if(equipWeapon != null)
+            if (equipWeapon != null)
                 equipWeapon.gameObject.SetActive(false);
             equipWeaponIndex = weaponIndex;
             equipWeapon = weapons[weaponIndex].GetComponent<Weapon>();
@@ -208,9 +210,9 @@ public class Player : MonoBehaviour
     }
     void Interation()
     {
-        if(iDown && nearObject != null && !isJump && !isDodge)
+        if (iDown && nearObject != null && !isJump && !isDodge)
         {
-            if(nearObject.tag == "Weapon")
+            if (nearObject.tag == "Weapon")
             {
                 Item item = nearObject.GetComponent<Item>();
                 int weaponIndex = item.value;
@@ -219,6 +221,20 @@ public class Player : MonoBehaviour
                 Destroy(nearObject);
             }
         }
+    }
+    void FreezeRotation()
+    {
+        rigid.angularVelocity = Vector3.zero;
+    }
+    void StopToWall()
+    {
+        Debug.DrawRay(transform.position, transform.forward * 5, Color.green);
+        isBorder = Physics.Raycast(transform.position, transform.forward, 5, LayerMask.GetMask("Wall"));
+    }
+    void FixedUpdate()
+    {
+        FreezeRotation();
+        StopToWall();
     }
     void OnCollisionEnter(Collision collision)
     {
