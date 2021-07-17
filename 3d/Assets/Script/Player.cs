@@ -212,7 +212,7 @@ public class Player : MonoBehaviour
     {
         if (iDown && nearObject != null && !isJump && !isDodge)
         {
-            if (nearObject.tag == "Weapon")
+            if (nearObject.tag == "Weapon" || nearObject.tag == "Melee")
             {
                 Item item = nearObject.GetComponent<Item>();
                 int weaponIndex = item.value;
@@ -278,12 +278,12 @@ public class Player : MonoBehaviour
     }
     void OnTriggerStay(Collider other)
     {
-        if (other.tag == "Weapon")
+        if (other.tag == "Weapon" || other.tag == "Melee")
             nearObject = other.gameObject;
     }
     void OnTriggerExit(Collider other)
     {
-        if (other.tag == "Weapon")
+        if (other.tag == "Weapon" || other.tag == "Melee")
             nearObject = null;
     }
 }
