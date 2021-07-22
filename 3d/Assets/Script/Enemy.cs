@@ -14,6 +14,7 @@ public class Enemy : MonoBehaviour
     public GameObject bullet;
     public bool isChase;
     public bool isAttack;
+    public bool isDead;
 
     public Rigidbody rigid;
     public BoxCollider boxCollider;
@@ -57,7 +58,7 @@ public class Enemy : MonoBehaviour
     }
     void Targeting()
     {
-        if (enemyType != Type.D)
+        if (!isDead && enemyType != Type.D)
         {
             float targetRadius = 0;
             float targetRange = 0;
@@ -183,6 +184,7 @@ public class Enemy : MonoBehaviour
             foreach (MeshRenderer mesh in meshs)
                 mesh.material.color = Color.gray;
             gameObject.layer = 14;
+            isDead = true;
             isChase = false;
             nav.enabled = false;
             anim.SetTrigger("doDie");

@@ -535,6 +535,7 @@ MonoBehaviour:
   bullet: {fileID: 6014243899131689278, guid: 0beaf00384793a943a1a4746a40fb604, type: 3}
   isChase: 0
   isAttack: 0
+  isDead: 0
   rigid: {fileID: 181967318}
   boxCollider: {fileID: 181967317}
   meshs: []
@@ -543,6 +544,7 @@ MonoBehaviour:
   missile: {fileID: 341488945288498245, guid: 746c8b17b6dc22e428e3367f8fac5e87, type: 3}
   missilePortA: {fileID: 1887533384}
   missilePortB: {fileID: 508874547}
+  isLook: 1
 --- !u!1 &195197822 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6490352389010560924, guid: 10653eccf6b69fd47938a227b4bf3863, type: 3}
@@ -5491,8 +5493,9 @@ GameObject:
   m_Component:
   - component: {fileID: 252772090}
   - component: {fileID: 252772091}
+  - component: {fileID: 252772092}
   m_Layer: 15
-  m_Name: Melee Area
+  m_Name: Boss Melee Area
   m_TagString: EnemyBullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5525,6 +5528,21 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3.5, y: 0.5, z: 3.5}
   m_Center: {x: 0, y: 0.5, z: 0}
+--- !u!114 &252772092
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 252772089}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9467b3644da06f04e9d668606e08b5f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 25
+  isMelee: 1
+  isRock: 0
 --- !u!1 &309863184 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6698954167970170456, guid: 06d503bba93001142b96e3510906db62, type: 3}
@@ -6242,6 +6260,7 @@ MonoBehaviour:
   bullet: {fileID: 2786525081914653308, guid: 49a9f1a29c405aa479802da7fd90351b, type: 3}
   isChase: 0
   isAttack: 0
+  isDead: 0
   rigid: {fileID: 0}
   boxCollider: {fileID: 0}
   meshs: []
@@ -6315,7 +6334,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4462523135328065168, guid: 464cc7c4f7ea10b47a36d7848aa9ca9a, type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4462523135328065168, guid: 464cc7c4f7ea10b47a36d7848aa9ca9a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -6537,6 +6556,7 @@ MonoBehaviour:
   bullet: {fileID: 0}
   isChase: 0
   isAttack: 0
+  isDead: 0
   rigid: {fileID: 0}
   boxCollider: {fileID: 0}
   meshs: []
@@ -7357,7 +7377,7 @@ Transform:
   - {fileID: 658792591}
   - {fileID: 1047679620}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1483942982
 GameObject:
@@ -22286,7 +22306,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5903297864969995812, guid: 8f5e135a19626f544908fc8f156144b9, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -13.8
+      value: -2.09
       objectReference: {fileID: 0}
     - target: {fileID: 5903297864969995812, guid: 8f5e135a19626f544908fc8f156144b9, type: 3}
       propertyPath: m_LocalRotation.w
@@ -22632,6 +22652,7 @@ MonoBehaviour:
   bullet: {fileID: 0}
   isChase: 0
   isAttack: 0
+  isDead: 0
   rigid: {fileID: 0}
   boxCollider: {fileID: 0}
   meshs: []
