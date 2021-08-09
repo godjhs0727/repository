@@ -60,6 +60,9 @@ public class Player : MonoBehaviour
         anim = GetComponentInChildren<Animator>();
         rigid = GetComponent<Rigidbody>();
         meshs = GetComponentsInChildren<MeshRenderer>();
+
+        Debug.Log(PlayerPrefs.GetInt("MaxScore", 112500));
+        //PlayerPrefs.SetInt("MaxScore", 112500);
     }
 
     void Update()
