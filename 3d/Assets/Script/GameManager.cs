@@ -50,6 +50,14 @@ public class GameManager : MonoBehaviour
 
         player.gameObject.SetActive(true);
     }
+    public void StageStart()
+    {
+
+    }
+    public void StageEnd()
+    {
+
+    }
     void Update()
     {
         if (isBattle)
