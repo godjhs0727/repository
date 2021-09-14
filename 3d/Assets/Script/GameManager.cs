@@ -9,6 +9,9 @@ public class GameManager : MonoBehaviour
     public GameObject gameCam;
     public Player player;
     public Boss boss;
+    public GameObject itemShop;
+    public GameObject weaponShop;
+    public GameObject startZone;
     public int stage;
     public float playTime;
     public bool isBattle;
@@ -52,11 +55,27 @@ public class GameManager : MonoBehaviour
     }
     public void StageStart()
     {
-
+        itemShop.SetActive(false);
+        weaponShop.SetActive(false);
+        startZone.SetActive(false);
+        isBattle = true;
+        StartCoroutine(InBattle());
     }
     public void StageEnd()
     {
+        player.transform.position = Vector3.up * 1.24f + Vector3.back * 7.84f;
 
+        itemShop.SetActive(true);
+        weaponShop.SetActive(true);
+        startZone.SetActive(true);
+
+        isBattle = false;
+        stage++;
+    }
+    IEnumerator InBattle()
+    {
+        yield return new WaitForSeconds(5);
+        StageEnd();
     }
     void Update()
     {
