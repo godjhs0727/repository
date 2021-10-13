@@ -10,6 +10,7 @@ public class Enemy : MonoBehaviour
     public int maxHealth;
     public int curHealth;
     public int score;
+    public GameManager manager;
     public Transform target;
     public BoxCollider meleeArea;
     public GameObject bullet;
@@ -194,6 +195,22 @@ public class Enemy : MonoBehaviour
             player.score += score;
             int ranCoin = Random.Range(0, 3);
             Instantiate(coins[ranCoin], transform.position, Quaternion.identity);
+
+            switch(enemyType)
+            {
+                case Type.A:
+                    manager.enemyCntA--;
+                    break;
+                case Type.B:
+                    manager.enemyCntB--;
+                    break;
+                case Type.C:
+                    manager.enemyCntC--;
+                    break;
+                case Type.D:
+                    manager.enemyCntD--;
+                    break;
+            }
 
             if (isGrenade)
             {

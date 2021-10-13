@@ -1,0 +1,2 @@
+D:\git\Study\Chap2\Chap2\Debug\Project6.exe.lastcodeanalysissucceeded
+D:\git\Study\Chap2\Chap2\Project6\Debug\NativeCodeAnalysis.read.1.tlog
