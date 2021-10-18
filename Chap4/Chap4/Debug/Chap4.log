@@ -1,0 +1,6 @@
+﻿  test 3.cpp
+test 3.obj : error LNK2019: "public: void __thiscall Sample::read(void)" (?read@Sample@@QAEXXZ)_main 함수에서 참조되는 확인할 수 없는 외부 기호
+test 3.obj : error LNK2019: "public: void __thiscall Sample::write(void)" (?write@Sample@@QAEXXZ)_main 함수에서 참조되는 확인할 수 없는 외부 기호
+test 3.obj : error LNK2019: "public: int __thiscall Sample::big(void)" (?big@Sample@@QAEHXZ)_main 함수에서 참조되는 확인할 수 없는 외부 기호
+test 3.obj : error LNK2019: "public: __thiscall Sample::~Sample(void)" (??1Sample@@QAE@XZ)_main 함수에서 참조되는 확인할 수 없는 외부 기호
+D:\git\Chap4\Debug\Chap4.exe : fatal error LNK1120: 4개의 확인할 수 없는 외부 참조입니다.
