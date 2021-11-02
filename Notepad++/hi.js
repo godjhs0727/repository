@@ -1,0 +1,5 @@
+
+	function hi()
+	{
+		alert("Hi");
+	}

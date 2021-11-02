@@ -1,0 +1,4 @@
+function gm()
+{
+	alert("goodmornig!!");
+}
