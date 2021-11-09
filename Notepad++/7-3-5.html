@@ -1,0 +1,16 @@
+<html><head><title>산술연산자 실습</title></head>
+<script language = "javascript">
+	function operation(form){
+	form.result.value=eval(form.oper.value);
+	}
+</script>
+<body>
+<h3>비교 연산자 예제</h3>
+		<form><b>수식을 입력하시오
+			<input type = "text" name="oper" value="" size = "20"><br>
+			결과:</b>
+			<input type = "text" name="result" onfocus="this.blur();"><br>
+			<input type = "button" value="계산하기" onclick="operation(this.form);">
+		</form>
+</body>
+</html>

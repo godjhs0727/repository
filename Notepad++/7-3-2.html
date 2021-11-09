@@ -1,0 +1,24 @@
+<html><head><title>변수와 상수의 실습</title></head>
+	<script language = "javascript">
+		var i = "전역";
+		function test1(){
+			var j = "지역";
+			document.write("test1(): i = "+i+", j= "+j+"<br>");
+		}
+		function test2(){
+			var i = "지역";
+			document.write("test2(): i = "+i+"<br>");
+		}
+		function test3(){
+			var m = 10; var n = 20;
+			document.write("m+n = " + (m + n));
+		}
+	</script>
+<body>
+	<script>
+		test1();
+		test2();
+		test3();
+	</script>
+</body>
+</html>
