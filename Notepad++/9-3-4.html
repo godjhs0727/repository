@@ -1,0 +1,19 @@
+<HTML><HEAD><TITLE>if-else if문</TITLE>
+<SCRIPT language="javascript">
+			function grade(){
+						txtTotal=form1.total.value
+						if(txtTotal>=90) result="수"
+						else if(txtTotal>=80)			result="우";
+						else if(txtTotal>=70)			result="미";
+						else if(txtTotal>=60)			result="양";
+						else if(txtTotal=="")			result="값을 입력하세요";
+						else		result="가";
+						form1.txtResult.value=result;				}
+</SCRIPT></HEAD>
+<BODY><CENTER>
+<FORM name="form1">
+총점 : <INPUT type="text" size=3 name="total"> &nbsp; &nbsp;
+<INPUT type="button" value="평가" onclick="grade()">
+&nbsp;&nbsp;
+결과 : <INPUT type="text" size=10 name="txtResult">
+</FORM></CENTER></BODY></HTML>
