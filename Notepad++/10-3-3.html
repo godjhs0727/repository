@@ -1,0 +1,36 @@
+<html><head><title> 배열 실습1 </title></head>
+<body><center>
+<script language = "javascript">
+	name1 = new Array();
+	name1[0]="장동건";
+	name1[1]="원빈";
+	name1[2]="비";
+	document.write("<h3>크기를 정하지 않은 배열의 결과</h3><p>");
+	document.write(" name1[0] = "+name1[0]+"<br>");
+	document.write(" name1[1] = "+name1[1]+"<br>");
+	document.write(" name1[2] = "+name1[2]+"<br>");
+	
+	name2 = new Array(3);
+	name2[0] = "고소영";
+	name2[2] = "김희애";
+	document.write("<h3>크기를 지정한 배열의 결과</h3><p>");
+	document.write(" name2[0] = "+name2[0]+"<br>");
+	document.write(" name2[1] = "+name2[1]+"<br>");
+	document.write(" name2[2] = "+name2[2]+"<br>");
+	
+	name3 = new Array("안성기", "박중훈", "배철수");
+	document.write("<h3>초기값을 부여한 배열의 결과</h3><p>");
+	for(i=0;i<name3.length;i++)
+		document.write(" name3["+i+"] = "+name3[i]+"<br>");
+		
+	name4 = new Array();
+	name4 = name3;
+	document.write("<h3> 배열의 대입 </h3><p>");
+	for(i=0;i<name4.length;i++)
+		document.write(" name4["+i+"] = "+name4[i]+"<br>");
+		
+	document.write("<h3> 배열의 원소의 갯수 </h3><p>");
+	document.write("name1.length = " + name1.length +"<br>");
+	document.write("name2.length = " + name2.length +"<br>");
+</script></center></body>
+</html>
