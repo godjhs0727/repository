@@ -1,0 +1,20 @@
+<html><head><title>이벤트 핸들러 연습</title></head>
+<body onload="alert('load 이벤트 발생')"
+		 onunload="alert('unload 이벤트 발생')">
+<form onsubmit="alert('submit 이벤트 발생')"
+		 onreset="alert('reset 이벤트 발생')">
+아이디: <input type="text" size=50
+	value="입력박스 클릭 수 배경을 클릭!"
+		onfocus="alert('focus 이벤트 발생')"
+		onblur="alert('blur 이벤트 발생')"><p>
+비밀번호: <input type = "text" size=50
+	value="입력박스에 키보드 입력!"
+		 onkeydown="alert('keydown 이벤트 발생')"><p>
+<input type="button" value="마우스 올리기 실험"
+			onmouseover="alert('mouseover 이벤트 발생')">
+<p>
+<input type="button" value="확인"
+	 onclick="alert('click 이벤트 발생')">
+<input type="submit" value="보내기">
+<input type="reset" value="다시쓰기">
+</form></body></html>

@@ -1,0 +1,18 @@
+<html><head><title>객체실습</title></head>
+<body>
+<script language="javascript">
+function student(name, age, grade){
+		this.name=name
+		this.age=age
+		this.grade=grade
+		this.showprofile=showprofile;
+}
+function showprofile(){
+		document.write("이름 : "+this.name+"<br>");
+		document.write("나이 : "+this.age+"<br>");
+		document.write("학년 : "+this.grade+"<br>");
+}
+hong=new student("Gil Dong Hong",20,1);
+hong.showprofile();
+</script><body>
+</html>

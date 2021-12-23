@@ -1,0 +1,28 @@
+<html><head><title>객체실습</title></head>
+<body>
+<script language="javascript">
+function student(name, age, grade,score){
+		this.name=name
+		this.age=age
+		this.grade=grade
+		this.score=score
+		this.showprofile=showprofile;
+}
+function score(kor,eng,math){
+		this.kor=kor
+		this.eng=eng
+		this.math=math
+}
+function showprofile(){
+		document.write("이름 : "+this.name+"<br>");
+		document.write("나이 : "+this.age+"<br>");
+		document.write("학년 : "+this.grade+"<br>");
+		document.write("국어점수 : "+this.score.kor+"<br>");
+		document.write("영어점수 : "+this.score.eng+"<br>");
+		document.write("수학점수 : "+this.score.math+"<br>");
+}
+hongscore=new score(90,100,90);
+hong=new student("Gil Dong Hong",20,1,hongscore);
+hong.showprofile();
+</script><body>
+</html>
