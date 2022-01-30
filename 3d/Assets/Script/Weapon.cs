@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
+    public Player player;
     public enum Type { Melee, Range};
     public Type type;
     public int damage;
@@ -26,9 +27,9 @@ public class Weapon : MonoBehaviour
             StopCoroutine("Swing");
             StartCoroutine("Swing");
         }
-        else if(type == Type.Range && curAmmo> 0)
+        else if(type == Type.Range && player.ammo> 0)
         {
-            curAmmo--;
+            player.ammo--;
             StartCoroutine("Shot");
 
         }

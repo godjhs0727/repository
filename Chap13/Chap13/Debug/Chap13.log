@@ -1,0 +1,3 @@
+﻿  실습5.cpp
+D:\git\Chap13\Chap13\실습5.cpp(4,62): warning C4290: 함수가 __declspec(nothrow)가 아님을 나타내려는 경우를 제외하고 C++ 예외 사양은 무시됩니다.
+  Chap13.vcxproj -> D:\git\Chap13\Debug\Chap13.exe

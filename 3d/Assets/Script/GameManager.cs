@@ -50,7 +50,10 @@ public class GameManager : MonoBehaviour
     void Awake()
     {
         enemyList = new List<int>();
-        maxScoreTxt.text = string.Format("{0:n0}", PlayerPrefs.GetInt("MaxScore"));    
+        maxScoreTxt.text = string.Format("{0:n0}", PlayerPrefs.GetInt("MaxScore"));
+
+        if (PlayerPrefs.HasKey("MaxScore"))
+            PlayerPrefs.SetInt("MaxScore", 0);
     }
 
     public void GameStart()
@@ -179,11 +182,11 @@ public class GameManager : MonoBehaviour
         playerHealthTxt.text = player.health + " / " + player.maxHealth;
         playerCoinTxt.text = string.Format("{0:n0}", player.coin);
         if (player.equipWeapon == null)
-            playerAmmoTxt.text = "- / " + player.ammo;
+            playerAmmoTxt.text = "- / " + player.maxAmmo;
         else if (player.equipWeapon.type == Weapon.Type.Melee)
-            playerAmmoTxt.text = "- / " + player.ammo;
+            playerAmmoTxt.text = "- / " + player.maxAmmo;
         else
-            playerAmmoTxt.text = player.equipWeapon.curAmmo + " / " + player.ammo;
+            playerAmmoTxt.text = player.ammo + " / " + player.maxAmmo;
 
         //¹«±â UI
         weapon1Img.color = new Color(1, 1, 1, player.hasWeapons[0] ? 1 : 0);

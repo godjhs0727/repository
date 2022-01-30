@@ -12,6 +12,7 @@ public class Player : MonoBehaviour
     public GameObject grenadeObject;
     public Camera followCamera;
     public GameManager manager;
+
     public int ammo;
     public int coin;
     public int health;

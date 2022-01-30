@@ -1,0 +1,37 @@
+<HTML><HEAD><TITLE>평균을 만들어 등급을 보여주는 프로그램</TITLE>
+<SCRIPT language="javascript">
+/*언어 수학 영어의 점수를 받고 모든 값의 평균을 구하여
+평균에 맞는 등급을 보여주는 프로그램입니다.*/
+
+			function everage(){
+				if(!form1.korean.value) alert("언어 숫자를 입력하세요");	//입력을 하지 않으면 경고창을 띄워서 입력하라고 알려주는 기능
+				if(!form1.math.value) alert("수학 숫자를 입력하세요");
+				if(!form1.english.value) alert("영어 숫자를 입력하세요");
+						answer=(parseInt(form1.korean.value)+parseInt(form1.math.value)+parseInt(form1.english.value))/3;		//계산은 숫자값이 나와야하기에 입력받은 값을 숫자값으로 변경하여 나눔
+						form1.total.value=answer; //form1의 평균 점수값으로 값 이동
+			}
+			function grade(){
+						txtTotal=form1.total.value
+						if(txtTotal>=95)					{result="A+";alert("축하합니다");}		//A+일 경우 축하창 띄움, 2줄 이상이기에 중괄호 이용
+						else if(txtTotal>=90)			result="A";
+						else if(txtTotal>=85)			result="B+";
+						else if(txtTotal>=80)			result="B";
+						else if(txtTotal>=75)			result="C+";
+						else if(txtTotal>=70)			result="C";
+						else if(txtTotal>=65)			result="D+";
+						else if(txtTotal>=60)			result="D";
+						else if(txtTotal=="")			result="값을 입력하세요";
+						else				{result="F";alert("분발하세요");}		//A+일때와 같은 방법
+						form1.txtResult.value=result;				}
+</SCRIPT></HEAD>
+<BODY><CENTER>
+<h3>JavaScript를 활용한 프로그램</h3>
+<FORM name="form1">
+언어 : <INPUT type="text" size=3 name="korean">
+수학 : <INPUT type="text" size=3 name="math">
+영어 : <INPUT type="text" size=3 name="english">
+<INPUT type="button" value="등록" onclick="everage()"><br><br>
+평균 : <INPUT type="text" size=3 name="total">&nbsp;
+<INPUT type="button" value="평가" onclick="grade()"><br>
+결과 : <INPUT type="text" size=11 name="txtResult">
+</FORM></CENTER></BODY></HTML>
