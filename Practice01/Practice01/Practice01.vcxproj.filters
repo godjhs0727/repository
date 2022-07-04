@@ -21,6 +21,15 @@
     <ClCompile Include="virtual.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="value and memory.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="in memory 01.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="in memory 02.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Point.h">
